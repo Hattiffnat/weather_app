@@ -1,0 +1,34 @@
+[project]
+name = "weather-app"
+version = "0.1.0"
+description = "The web app that shows weather from https://open-meteo.com/"
+authors = [
+    {name = "Hattiffnat",email = "sereyfeam@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "flask (>=3.1.1,<4.0.0)",
+    "requests (>=2.32.3,<3.0.0)"
+]
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+isort = "^6.0.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 90
+target-version = ["py311"]
+skip-string-normalization = false
+
+[tool.isort]
+profile = "black"
+line_length = 90
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"

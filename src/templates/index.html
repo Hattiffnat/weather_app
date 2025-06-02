@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Прогноз погоды</title>
+</head>
+
+<body>
+    <h1>Погода в вашем городе</h1>
+
+    <!-- Форма для ручного ввода города -->
+    <form method="post">
+        <input type="text" name="city" placeholder="Введите город" required>
+        <button type="submit">Узнать погоду</button>
+    </form>
+
+    <hr>
+
+    <!-- Сообщение о городе из cookie -->
+    {% if not weather and request.cookies.last_city %}
+    <p>Вы ранее смотрели погоду в <strong>{{ request.cookies.last_city }}</strong>.</p>
+    <form method="post">
+        <input type="hidden" name="city" value="{{ request.cookies.last_city }}">
+        <button type="submit">Показать снова</button>
+    </form>
+    {% endif %}
+
+    <!-- Погода, если данные получены -->
+    {% if weather %}
+    <h2>Погода в {{ weather.city }}</h2>
+    <p>Температура: {{ weather.temperature }}°C</p>
+    <p>Описание: {{ weather.description }}</p>
+    <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Иконка погоды">
+    {% elif error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</body>
+
+</html>
